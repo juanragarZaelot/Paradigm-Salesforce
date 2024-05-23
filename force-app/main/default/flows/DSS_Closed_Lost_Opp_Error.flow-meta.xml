@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <customErrors>
+        <name>Closed_Loss_Reason</name>
+        <label>Closed Loss Reason</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <customErrorMessages>
+            <errorMessage>Please select a loss reason to close this opportunity.</errorMessage>
+            <fieldSelection>Loss_Reason__c</fieldSelection>
+            <isFieldError>true</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <description>If a member of the Digital Tools team closes the opportunity and marks it as &quot;lost&quot;, they will need to list a loss reason</description>
+        <name>DSS_Close_Lost_Opportunity</name>
+        <label>DSS Close Lost Opportunity</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Others Closed</defaultConnectorLabel>
+        <rules>
+            <name>DSS_Close_Lost</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Profile.Id</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>00e3l000001Mrpj</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Profile.Id</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>00e3l000001Mrpt</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Closed_Loss_Reason</targetReference>
+            </connector>
+            <label>DSS Close Lost</label>
+        </rules>
+    </decisions>
+    <description>If a Digital Tools team member closes an opportunity with as &quot;lost&quot;, they will receive an error message asking to choose a loss reason.</description>
+    <environments>Default</environments>
+    <interviewLabel>DSS Closed Lost Opp Error {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>DSS Closed Lost Opp Error</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>DSS_Close_Lost_Opportunity</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed Lost</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Loss_Reason__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

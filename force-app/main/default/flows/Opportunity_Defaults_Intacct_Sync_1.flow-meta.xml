@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <description>Migrated from the Opportunity Defaults - Intacct Sync process using Opportunity criteria.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>formula_1_myRule_1_A1_3923602319</name>
+        <dataType>Date</dataType>
+        <expression>ADDMONTHS({!$Record.CloseDate}, ({!$Record.Contract_Term_Years__c*12})) -1</expression>
+    </formulas>
+    <formulas>
+        <name>formula_2_myRule_1_A1_8788382483</name>
+        <dataType>String</dataType>
+        <expression>IF(ISPICKVAL({!$Record.CurrencyIsoCode}, &quot;USD&quot;), &quot;a1g3l00000AmAmGAAV&quot;, IF(ISPICKVAL({!$Record.CurrencyIsoCode}, &quot;CAD&quot;), &quot;a1g3l00000AmAmDAAV&quot;,
+IF(ISPICKVAL({!$Record.CurrencyIsoCode}, &quot;EUR&quot;), &quot;a1g3l00000AmAmHAAV&quot;, NULL
+)))</expression>
+    </formulas>
+    <formulas>
+        <name>formula_3_myRule_1_A1_9840537386</name>
+        <dataType>String</dataType>
+        <expression>IF(ISPICKVAL({!$Record.CurrencyIsoCode}, &quot;USD&quot;), &quot;a1g3l00000AmAmGAAV&quot;, IF(ISPICKVAL({!$Record.CurrencyIsoCode}, &quot;CAD&quot;), &quot;a1g3l00000AmAmDAAV&quot;,
+IF(ISPICKVAL({!$Record.CurrencyIsoCode}, &quot;EUR&quot;), &quot;a1g3l00000AmAmHAAV&quot;, NULL
+)))</expression>
+    </formulas>
+    <interviewLabel>Opportunity Defaults - Intacct Sync_1 {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity Defaults - Intacct Sync_1</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>myRule_1_A1</name>
+        <label>Defaults</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <stringValue>0123l0000019KvlAAE</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ia_crm__End_Date__c</field>
+            <value>
+                <elementReference>formula_1_myRule_1_A1_3923602319</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ia_crm__Intacct_Entity__c</field>
+            <value>
+                <elementReference>formula_2_myRule_1_A1_8788382483</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ia_crm__Intacct_Location__c</field>
+            <value>
+                <elementReference>formula_3_myRule_1_A1_9840537386</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ia_crm__Renew__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ia_crm__Start_Date__c</field>
+            <value>
+                <elementReference>$Record.CloseDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>myRule_1_A1</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>0123l0000012uzfAAA</stringValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
