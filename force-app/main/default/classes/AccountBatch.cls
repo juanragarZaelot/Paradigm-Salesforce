@@ -11,7 +11,7 @@ global class AccountBatch  implements Database.Batchable<SObject>, Database.Stat
     
     global Database.QueryLocator start(Database.BatchableContext context) {
         
-        String query = 'SELECT Id,ia_crm__IntacctID__c, Intacct_Customer_Id__c, Name, Sponsored_by__c  from Account order by CreatedDate ';
+        String query = 'SELECT Id,ia_crm__IntacctID__c, Intacct_Customer_Id__c, Name, Sponsored_by__c  from Account WHERE Type = \'Billed Customer\' OR OR  Type = \'Customer\' order by CreatedDate ';
 		return Database.getQueryLocator(query);
 
     }
@@ -20,6 +20,9 @@ global class AccountBatch  implements Database.Batchable<SObject>, Database.Stat
 
         for(Account acc: scope){
 			acc.Intacct_Customer_Id__c = rowNumber;
+            if(acc.ia_crm__IntacctID__c == null || acc.ia_crm__IntacctID__c == ''){
+                acc.ia_crm__IntacctID__c = String.valueOf(rowNumber);
+            }
             rowNumber++;
         }
         Database.update(scope, false);

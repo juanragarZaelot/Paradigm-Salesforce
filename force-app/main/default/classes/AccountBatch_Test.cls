@@ -23,5 +23,6 @@ public class AccountBatch_Test {
         Test.stopTest();
         Account acc = [SELECT Id, Intacct_Customer_Id__c from Account LIMIT 1];
         Assert.isTrue(acc.Intacct_Customer_Id__c != null, 'Intacct Customer Id should has a value.');
+        
     }
 }

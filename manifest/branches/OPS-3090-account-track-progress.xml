@@ -6,7 +6,6 @@
     </types>
     <types>
 		<members>Account.Intacct_Customer_Id__c</members>
-        <members>Account.Intacct_Customer_Id_Shown__c</members>
         <name>CustomField</name>
 	</types>
     <types>
