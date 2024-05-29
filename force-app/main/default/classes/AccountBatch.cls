@@ -5,13 +5,12 @@
   - class to get all accounts and update Intacct Customer Id
  
  */
-global class AccountBatch  implements Database.Batchable<SObject>, Database.Stateful{
+global class AccountBatch  implements Database.Batchable<SObject>{
 
-    global Decimal rowNumber = 1;
     
     global Database.QueryLocator start(Database.BatchableContext context) {
         
-        String query = 'SELECT Id,ia_crm__IntacctID__c, Intacct_Customer_Id__c, Name, Sponsored_by__c  from Account WHERE Type = \'Billed Customer\' OR OR  Type = \'Customer\' order by CreatedDate ';
+        String query = 'SELECT Id,ia_crm__IntacctID__c, Intacct_Customer_Id__c, Name, Sponsored_by__c  from Account WHERE (Type = \'Billed Customer\' OR Type = \'Customer\') AND  Intacct_Customer_Id__c = null order by CreatedDate ';
 		return Database.getQueryLocator(query);
 
     }
@@ -19,11 +18,9 @@ global class AccountBatch  implements Database.Batchable<SObject>, Database.Stat
     global void execute(Database.BatchableContext context, List<Account> scope){
 
         for(Account acc: scope){
-			acc.Intacct_Customer_Id__c = rowNumber;
-            if(acc.ia_crm__IntacctID__c == null || acc.ia_crm__IntacctID__c == ''){
-                acc.ia_crm__IntacctID__c = String.valueOf(rowNumber);
+			if(acc.Intacct_Customer_Id__c == null && acc.ia_crm__IntacctID__c != null){
+                acc.Intacct_Customer_Id__c = Decimal.valueOf(acc.ia_crm__IntacctID__c);
             }
-            rowNumber++;
         }
         Database.update(scope, false);
 

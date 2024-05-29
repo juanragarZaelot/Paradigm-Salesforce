@@ -6,7 +6,7 @@
     (Account_Track_Progress) 
 */
 @isTest
-public class FlowAccountTrackProgress {
+public class FlowAccountTrackProgress_Test {
 
     @isTest
     public static void createAccount_Test() {

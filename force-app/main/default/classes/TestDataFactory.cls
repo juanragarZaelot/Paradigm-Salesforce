@@ -116,7 +116,59 @@ public with sharing class TestDataFactory {
                     Account.Name => 'Test Name',
                     Account.Account_Nickname__c => 'Test Nickname',
                     Account.AccountNumber => '123456789',
-                    Account.RecordTypeId => recTypeId
+                    Account.RecordTypeId => recTypeId,
+                    Account.Type => 'Customer'
+            };
+        }
+    }
+
+    public class OpportunityDefaults implements IFieldDefaults {
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SObjectField, Object>{
+                    Opportunity.StageName => 'Prospecting',
+                    Opportunity.Name => 'Test Opportunity',
+                    Opportunity.CloseDate => Date.today().addDays(1)
+            };
+        }
+    }
+
+    public class Product2Defaults implements IFieldDefaults {
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SObjectField, Object>{
+                Product2.Description => 'Test Description',
+                Product2.Family => 'Build Optimize',
+                Product2.Name => 'Test Name',
+                Product2.QuantityUnitOfMeasure => 'Each',
+                Product2.ProductCode => 'code 20'
+            };
+        }
+    }
+
+    public class Pricebook2Defaults implements IFieldDefaults {
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SObjectField, Object>{
+                Pricebook2.Description => 'Test Description',
+                Pricebook2.Name => 'Test',
+                Pricebook2.RecordTypeId => Schema.SObjectType.Pricebook2.getRecordTypeInfosByName().get('Billing Pricelist').getRecordTypeId()
+            };
+        }
+    }
+
+    public class PricebookEntryDefaults implements IFieldDefaults {
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SObjectField, Object>{
+                PricebookEntry.UnitPrice => 25,
+                PricebookEntry.IsActive => true,
+                PricebookEntry.ia_crm__Tier_Pricing__c => '25'
+            };
+        }
+    }
+
+    public class OpportunityLineItemDefaults implements IFieldDefaults {
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SObjectField, Object>{
+                OpportunityLineItem.Quantity => 2,
+                OpportunityLineItem.UnitPrice => 1500
             };
         }
     }

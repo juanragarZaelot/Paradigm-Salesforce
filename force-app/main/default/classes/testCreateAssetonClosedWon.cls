@@ -2,33 +2,52 @@
 
 private class testCreateAssetonClosedWon {
 	
-	static testMethod void testCreateAssetonClosedWon(){
+	@isTest
+	public static void createAssetonClosedWon_Test(){
 		
-		Account a = [select Id from Account limit 1];
-		PricebookEntry pbID = [select Id from PricebookEntry limit 1];
-		Opportunity o = new Opportunity();
-		OpportunityLineItem ol = new OpportunityLineItem();
+		Account acc = (Account)TestDataFactory.createSObject(new Account(), TestDataFactory.CustomerAccountsDefaults.class);
+        insert acc;
+
+        Opportunity oppor = (Opportunity)TestDataFactory.createSObject(new Opportunity(), TestDataFactory.OpportunityDefaults.class);
+		oppor.AccountId = acc.Id;
+        insert oppor;
+
+		Product2 product = (Product2)TestDataFactory.createSObject(new Product2(), TestDataFactory.Product2Defaults.class);
+        insert product;
+
+		Id pricebookId = Test.getStandardPricebookId();
+        
+		PricebookEntry priceBookEntryStandard = (PricebookEntry)TestDataFactory.createSObject(new PricebookEntry(), TestDataFactory.PricebookEntryDefaults.class);
+		priceBookEntryStandard.Pricebook2Id = pricebookId;
+		priceBookEntryStandard.Product2Id = product.Id;
+        insert priceBookEntryStandard;
+
+		Pricebook2 priceBook = (Pricebook2)TestDataFactory.createSObject(new Pricebook2(), TestDataFactory.Pricebook2Defaults.class);
+        insert priceBook;
+
+		PricebookEntry priceBookE = (PricebookEntry)TestDataFactory.createSObject(new PricebookEntry(), TestDataFactory.PricebookEntryDefaults.class);
+		priceBookE.Pricebook2Id = priceBook.Id;
+		priceBookE.Product2Id = product.Id;
+        insert priceBookE;
+
+		OpportunityLineItem opporLineItem = (OpportunityLineItem)TestDataFactory.createSObject(new OpportunityLineItem(), TestDataFactory.OpportunityLineItemDefaults.class);
+        opporLineItem.OpportunityId = oppor.Id;
+		opporLineItem.PricebookEntryId = priceBookE.Id;
+		insert opporLineItem;
+
+		Test.startTest();
+
+		oppor.StageName= 'Closed Won';
+		update oppor;
 		
-		o.AccountId = a.Id;
-		o.Name = 'test';
-		o.StageName = 'Prospecting';
-		o.CloseDate = date.today();
-		insert o;
+		delete opporLineItem;
+		delete oppor;
 		
-		ol.OpportunityId = o.Id;
-		ol.Quantity = 1;
-		ol.UnitPrice = 2.00;
-		ol.PricebookEntryId = pbId.Id;
-		
-		insert ol;
-		
-		o.StageName= 'Closed Won';
-		update o;
-		
-		delete ol;
-		delete o;
-		
-		
+		Test.stopTest();
+
+		List<Opportunity> oppList = [SELECT name FROM Opportunity];
+
+		Assert.areEqual(0,oppList.size(), 'It should not get any Opportunity');
 		
 	}
 	

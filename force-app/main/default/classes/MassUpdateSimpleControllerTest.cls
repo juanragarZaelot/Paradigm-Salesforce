@@ -3,16 +3,25 @@
  * and triggers.
  */
 @isTest
-private class MassUpdateSimpleControllerTest {
+public class MassUpdateSimpleControllerTest {
+	@TestSetup
+    public static void loadData() {
+        Opportunity oppor = (Opportunity)TestDataFactory.createSObject(new Opportunity(), TestDataFactory.OpportunityDefaults.class);
+        insert oppor;
+        
+    }
 
-
-    static testMethod void singleUpdateTest() {
+	@isTest
+    public static void singleUpdate_Test() {
     	Opportunity o = new Opportunity();
     	List<Opportunity> oppList = [SELECT name FROM Opportunity LIMIT 20];
     	
+		Test.startTest();
     	ApexPages.StandardSetController setCtr = new ApexPages.StandardSetController(oppList);
     	setCtr.setSelected(new Opportunity[]{o});
         MassUpdateSimpleController controller = new MassUpdateSimpleController(setCtr);
+
+		Test.stopTest();
 		System.assertEquals(1, controller.getRecordSize());
 		
 		System.assert(controller.getFieldTypeOptions().size()>1);
@@ -94,7 +103,8 @@ private class MassUpdateSimpleControllerTest {
     	}
     }  */
     
-    static testMethod void linkTest() {
+	@isTest
+    public static void linkTest() {
     	Opportunity o = new Opportunity();
     	List<Opportunity> oppList = [SELECT name FROM Opportunity LIMIT 20];
     	
@@ -114,7 +124,8 @@ private class MassUpdateSimpleControllerTest {
 		System.assert(controller.getFieldTypeOptions()!=null);
     }
     
-    static testMethod void fieldTest() {
+    @isTest
+    public static void fieldTest() {
     	
     	List<Opportunity> oppList = new Opportunity[]{};
     	
@@ -124,7 +135,8 @@ private class MassUpdateSimpleControllerTest {
 		System.assert(controller.getFieldTypeOptions()==null);
     }
     
-    static testMethod void miscTest() {
+    @isTest
+    public static void miscTest() {
     	
     	List<Opportunity> oppList = new Opportunity[]{};
     	
@@ -137,8 +149,8 @@ private class MassUpdateSimpleControllerTest {
 		System.assert(controller.getPicklistValues()==null);
     }
     
-    @isTest(SeeAllData=true)
-    static void testOpportunityInRelatedList(){
+    @isTest
+    public static void testOpportunityInRelatedList(){
         List<Opportunity> oppList = [SELECT name, AccountId FROM Opportunity LIMIT 20];
         ApexPages.StandardSetController setCtr = new ApexPages.StandardSetController(oppList);
         apexpages.currentpage().getparameters().put('id' , oppList.get(0).AccountId);
