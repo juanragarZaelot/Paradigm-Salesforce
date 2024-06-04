@@ -124,10 +124,12 @@ public with sharing class TestDataFactory {
 
     public class OpportunityDefaults implements IFieldDefaults {
         public Map<SObjectField, Object> getFieldDefaults() {
+            String recTypeId = [SELECT Id FROM RecordType WHERE Name = 'Digital Tools' AND SObjectType = 'Opportunity'].Id;
             return new Map<SObjectField, Object>{
                     Opportunity.StageName => 'Prospecting',
                     Opportunity.Name => 'Test Opportunity',
-                    Opportunity.CloseDate => Date.today().addDays(1)
+                    Opportunity.CloseDate => Date.today().addDays(1),
+                    Opportunity.RecordTypeId => recTypeId
             };
         }
     }
