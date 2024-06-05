@@ -175,5 +175,16 @@ public with sharing class TestDataFactory {
         }
     }
 
+    public class ContactDefaults implements IFieldDefaults { 
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SobjectField, Object> {
+                Contact.FirstName => 'Fiest Name Test',
+                Contact.LastName => 'Last Name Test',
+                Contact.Email => 'test@test.com',
+                Contact.Lead_Date__c => false,
+                Contact.LeadSource => 'Portal - MyBFSBuilder'
+            };
+        }
+    } 
     
 }
