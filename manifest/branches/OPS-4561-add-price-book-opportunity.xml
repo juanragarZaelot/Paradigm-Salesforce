@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>FlowOpportunityBeforeCreate_Test</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+		<members>Paradigm_Config__mdt</members>
+        <name>CustomObject</name>
+	</types>
+    <types>
+		<members>Paradigm_Config__mdt.Category__c</members>
+        <members>Paradigm_Config__mdt.Key__c</members>
+        <members>Paradigm_Config__mdt.Value__c</members>
+        <members>Paradigm_Config__mdt.Description__c</members>
+        <members>Paradigm_Config__mdt.Comments__c</members>
+        <name>CustomField</name>
+	</types>
+    <types>
+		<members>Paradigm_Config.Price_Book_Digital_Tools</members>
+        <name>CustomMetadata</name>
+	</types>
+
+    <version>59.0</version>
+</Package>
