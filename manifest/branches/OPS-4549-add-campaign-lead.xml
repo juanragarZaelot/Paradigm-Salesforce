@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>CampaignMemberUpdateLeadBatch</members>
+        <members>CampaignMemberUpdateLeadBatch_Test</members>
+        <members>FlowCampaignMemberAfterCreate_Test</members>
+        <members>FlowCampaignMemberBeforeDelete_Test</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Campaign_Member_After_Create</members>
+        <name>Flow</name>
+    </types>
+    <version>59.0</version>
+</Package>
+

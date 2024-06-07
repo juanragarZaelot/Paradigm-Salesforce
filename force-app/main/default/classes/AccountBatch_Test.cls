@@ -20,7 +20,7 @@ public class AccountBatch_Test {
     }
 
     @isTest
-    public static void accountBatch_Test() {
+    public static void batch_Test() {
         Test.startTest();
         AccountBatch b = new AccountBatch();
         ID batchprocessid = Database.executeBatch(b);

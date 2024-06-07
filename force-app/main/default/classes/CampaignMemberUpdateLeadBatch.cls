@@ -10,21 +10,29 @@ global class CampaignMemberUpdateLeadBatch implements Database.Batchable<SObject
     
     global Database.QueryLocator start(Database.BatchableContext context) {
         
-        String query = 'SELECT Id, CampaignId, LeadId, Lead.Campaign__c, Status  from CampaignMember Where Lead.Campaign__c = null';
+        String query = 'SELECT Id, CampaignId, LeadId, Lead.Campaign__c,Lead.LeadSource, Lead.Status,Lead.Company, Lead.FirstName, Lead.LastName, Lead.Title, Lead.Address from CampaignMember Where CampaignId != null AND LeadId !=null order by CreatedDate';
 		return Database.getQueryLocator(query);
 
     }
 
     global void execute(Database.BatchableContext context, List<CampaignMember> scope){
 
-        List<Lead> leadList = new List<Lead>();
+        Map<Id, Lead> leadsMap = new Map<Id, Lead>();
+        
         for(CampaignMember member: scope){
-			Lead l = new Lead();
+            
+            Lead l = new Lead();
             l.Campaign__c = member.CampaignId;
             l.Id = member.LeadId;
-            leadList.add(l);
+            l.LeadSource = member.Lead.LeadSource;
+            l.Status = member.Lead.Status;
+            l.Company = member.Lead.Company;
+            l.FirstName = member.Lead.FirstName;
+            l.LastName = member.Lead.LastName;
+            l.Title = member.Lead.Title;
+            leadsMap.put(member.LeadId, l);
         }
-        Database.update(scope, false);
+        Database.update(leadsMap.values(), false);
 
     }
 

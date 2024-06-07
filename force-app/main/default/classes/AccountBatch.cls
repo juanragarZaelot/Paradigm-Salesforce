@@ -10,7 +10,7 @@ global class AccountBatch  implements Database.Batchable<SObject>{
     
     global Database.QueryLocator start(Database.BatchableContext context) {
         
-        String query = 'SELECT Id,ia_crm__IntacctID__c, Intacct_Customer_Id__c, Name, Sponsored_by__c  from Account WHERE (Type = \'Billed Customer\' OR Type = \'Customer\') AND  Intacct_Customer_Id__c = null order by CreatedDate ';
+        String query = 'SELECT Id,ia_crm__IntacctID__c, Intacct_Customer_Id__c, Name, Sponsored_by__c  from Account WHERE (Type = \'Billed Customer\' OR Type = \'Customer\') order by CreatedDate ';
 		return Database.getQueryLocator(query);
 
     }

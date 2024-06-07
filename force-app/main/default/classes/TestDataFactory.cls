@@ -186,5 +186,40 @@ public with sharing class TestDataFactory {
             };
         }
     } 
+
+    public class CampaignDefaults implements IFieldDefaults { 
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SobjectField, Object> {
+                Campaign.Name => 'Cmapaign Name Test',
+                Campaign.IsActive => true,
+                Campaign.StartDate => Date.today(),
+                Campaign.EndDate => Date.today() + 5,
+                Campaign.Description => 'Test',
+                Campaign.Status => 'In Progress'
+            };
+        }
+    } 
+
+    public class LeadDefaults implements IFieldDefaults { 
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SobjectField, Object> {
+                Lead.FirstName => 'Test First Name',
+                Lead.LastName => 'Test Last Name',
+                Lead.Title => 'Test Title',
+                Lead.LeadSource => 'Portal - MyBFSBuilder',
+                Lead.Status => 'Qualified',
+                Lead.Company => 'Test Company'
+            };
+        }
+    } 
+
+    public class CampaignMemberDefaults implements IFieldDefaults { 
+        public Map<SObjectField, Object> getFieldDefaults() {
+            return new Map<SobjectField, Object> {
+                CampaignMember.CurrencyIsoCode => 'USD',
+                CampaignMember.Status => 'Sent'
+            };
+        }
+    } 
     
 }

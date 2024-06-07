@@ -2,8 +2,8 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>60.0</apiVersion>
     <environments>Default</environments>
-    <interviewLabel>Campaign Member - After Create {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Campaign Member - After Create</label>
+    <interviewLabel>Campaign Member - Before Delete {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Campaign Member - Before Delete</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -27,7 +27,7 @@
         <name>Update_Lead</name>
         <label>Update Lead</label>
         <locationX>176</locationX>
-        <locationY>323</locationY>
+        <locationY>287</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -38,9 +38,6 @@
         </filters>
         <inputAssignments>
             <field>Campaign__c</field>
-            <value>
-                <elementReference>$Record.CampaignId</elementReference>
-            </value>
         </inputAssignments>
         <object>Lead</object>
     </recordUpdates>
@@ -66,16 +63,8 @@
             </value>
         </filters>
         <object>CampaignMember</object>
-        <recordTriggerType>CreateAndUpdate</recordTriggerType>
-        <triggerType>RecordAfterSave</triggerType>
+        <recordTriggerType>Delete</recordTriggerType>
+        <triggerType>RecordBeforeDelete</triggerType>
     </start>
     <status>Active</status>
-    <variables>
-        <name>varLeadRecord</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Lead</objectType>
-    </variables>
 </Flow>
