@@ -8,7 +8,7 @@ private class testCreateAssetonClosedWon {
 		Account acc = (Account)TestDataFactory.createSObject(new Account(), TestDataFactory.CustomerAccountsDefaults.class);
         insert acc;
 
-        Opportunity oppor = (Opportunity)TestDataFactory.createSObject(new Opportunity(), TestDataFactory.OpportunityDefaults.class);
+        Opportunity oppor = (Opportunity)TestDataFactory.createSObject(new Opportunity(), TestDataFactory.OpportunityOmmniDefaults.class);
 		oppor.AccountId = acc.Id;
         insert oppor;
 

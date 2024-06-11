@@ -2,7 +2,13 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>FlowOpportunityBeforeCreate_Test</members>
+        <members>testCreateAssetonClosedWon</members>
+        <members>TestDataFactory</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Opportunity_Before_Create</members>
+        <name>Flow</name>
     </types>
     <types>
 		<members>Paradigm_Config__mdt</members>

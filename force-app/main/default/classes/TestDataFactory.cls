@@ -134,6 +134,18 @@ public with sharing class TestDataFactory {
         }
     }
 
+    public class OpportunityOmmniDefaults implements IFieldDefaults {
+        public Map<SObjectField, Object> getFieldDefaults() {
+            String recTypeId = [SELECT Id FROM RecordType WHERE Name = 'Omni/Nexus' AND SObjectType = 'Opportunity'].Id;
+            return new Map<SObjectField, Object>{
+                    Opportunity.StageName => 'Prospecting',
+                    Opportunity.Name => 'Test Opportunity',
+                    Opportunity.CloseDate => Date.today().addDays(1),
+                    Opportunity.RecordTypeId => recTypeId
+            };
+        }
+    }
+
     public class Product2Defaults implements IFieldDefaults {
         public Map<SObjectField, Object> getFieldDefaults() {
             return new Map<SObjectField, Object>{
