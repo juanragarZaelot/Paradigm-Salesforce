@@ -15,7 +15,8 @@ private class FlowOpportunityBeforeCreate_Test {
         Test.startTest();
         
         Test.stopTest();
-        Opportunity opporResult = [SELECT Id, Pricebook2Id from Opportunity LIMIT 1];
+        Opportunity opporResult = [SELECT Id, Pricebook2Id, CloseDate from Opportunity LIMIT 1];
         Assert.areEqual(PRICE_BOOK_DIGITAL_TOOLS.Value__c, opporResult.Pricebook2Id, 'Opportunity Price Book should be Digital Tools.');
+        Assert.areEqual(Date.today() + 30, opporResult.CloseDate, 'CloseDate should be currently date + 30 days.');
     }
 }

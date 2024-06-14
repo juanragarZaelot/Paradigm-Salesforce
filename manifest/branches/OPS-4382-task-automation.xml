@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Opportunity_After_Create</members>
+        <members>Opportunity_Before_Create</members>
+        <name>Flow</name>
+    </types>
+    <types>
+        <members>FlowOpportunityBeforeCreate_Test</members>
+        <members>FlowOpportunityAfterCreate_Test</members>
+        <members>OpportunityReminderSchedule</members>
+        <members>OpportunityHelper</members>
+        <members>EmailHelper</members>
+        <members>EmailHelper_Test</members>
+        
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>SendEmailRelatedOpportunityTrigger</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+		<members>Opportunity.Record_Type_Name__c</members>
+        <name>CustomField</name>
+	</types>
+    <types>
+        <members>DSSEmailTemplates/Opportunity_Lead_Stage_Intro_1718231638630</members>
+        <name>EmailTemplate</name>
+    </types>
+    <types>
+		<members>Send_Email_Related_Opportunity__e</members>
+        <name>CustomObject</name>
+	</types>
+    <types>
+		<members>Send_Email_Related_Opportunity__e.Contact_Id__c</members>
+        <members>Send_Email_Related_Opportunity__e.Email__c</members>
+        <members>Send_Email_Related_Opportunity__e.Email_From__c</members>
+        <members>Send_Email_Related_Opportunity__e.Email_Template_Dev_Name__c</members>
+        <members>Send_Email_Related_Opportunity__e.Opportunity_Id__c</members>
+        <members>Send_Email_Related_Opportunity__e.Owner_Name__c</members>
+        <name>CustomField</name>
+	</types>
+    <version>59.0</version>
+</Package>

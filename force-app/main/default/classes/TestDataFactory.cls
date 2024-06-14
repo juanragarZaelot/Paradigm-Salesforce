@@ -233,5 +233,24 @@ public with sharing class TestDataFactory {
             };
         }
     } 
+
+    public class UserAdminDefaults implements IFieldDefaults {
+        public Map<SObjectField, Object> getFieldDefaults() {
+            Id pId = [SELECT Id FROM Profile WHERE name = 'System Administrator' LIMIT 1].Id;
+            return new Map<SobjectField, Object>{
+                    User.LastName => 'Test Admin User',
+                    User.Email => 'testAdminEmail@paradigm.com',
+                    User.Alias => 'testAdm',
+                    User.Username => 'unittestingAdmin@paradigm.com',
+                    User.CommunityNickname => 'testAdminUser23513',
+                    User.LocaleSidKey => 'en_US',
+                    User.TimeZoneSidKey => 'GMT',
+                    User.ProfileID => pId,
+                    User.LanguageLocaleKey => 'en_US',
+                    User.EmailEncodingKey => 'UTF-8',
+                    User.IsActive => true
+            };
+        }
+    }
     
 }
